@@ -1,0 +1,64 @@
+{% extends 'dati_taller/../layouts/base-fullscreen.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Login {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+    <!-- Page content -->
+    <div class="container mt--8 pb-5">
+      <div class="row justify-content-center">
+        <div class="col-lg-4 col-md-7">
+          <div class="card bg-secondary shadow border-0">
+            <div class="card-header bg-transparent pb-5">
+              <div class="text-muted text-center mt-2 mb-3">
+                INGRESAR
+              </div>
+            </div>
+            <div class="card-body px-lg-5 py-lg-5">
+              <div class="text-center text-muted mb-4">
+                {% if msg %}
+                  <p>{{ msg }}</p>
+                {% else %}
+                  <p>
+                    <i class="ni ni-app ni-5x"></i>
+                  </p>
+                {% endif %}
+              <form method="POST">
+                {% csrf_token %}
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend float-right">
+                      <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                          {{ form.user | as_crispy_field }}
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                    </div>
+                    {{ form.password | as_crispy_field }}
+                  </div>
+                </div>
+
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary my-4">Entrar</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

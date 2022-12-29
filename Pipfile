@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3.1"
+django-fontawesome-5 = "*"
+django-crispy-forms = "*"
+sweetify = "*"
+django-bootstrap4 = "*"
+django-import-export = "*"
+mysqlclient = "*"
+django-ckeditor = "*"
+django-tinymce = "*"
+django-dkim = "*"
+psycopg2 = "*"
+gunicorn = "*"
+django-sendmail-backend = "*"
+celery="4.2.1"
+redis = "*"
+whitenoise = "*"
+django-bootstrap-datepicker-plus = "*"
+pillow = "*"
+python-decouple = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.10"

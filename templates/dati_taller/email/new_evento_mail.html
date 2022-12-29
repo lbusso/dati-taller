@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hello Bulma!</title>
+      <style>
+          .notification {
+              background-color: whitesmoke;
+              border-radius: 4px;
+              position: relative;
+              padding: 1.25rem 2.5rem 1.25rem 1.5rem;
+                }
+          .notification.is-success.is-light {
+              background-color: #effaf3;
+              color: #257942;
+            }
+          .notification.is-success {
+              background-color: #48c774;
+              color: #fff;
+            }
+          .column {
+              display: block;
+              flex-basis: 0;
+              flex-grow: 1;
+              flex-shrink: 1;
+              padding: 0.75rem;
+            }
+          .column.is-half {
+          flex: none;
+          width: 50%;
+        }
+        .button {
+          background-color: white;
+          border-color: #dbdbdb;
+          border-width: 1px;
+          color: #363636;
+          cursor: pointer;
+          justify-content: center;
+          padding-bottom: calc(0.5em - 1px);
+          padding-left: 1em;
+          padding-right: 1em;
+          padding-top: calc(0.5em - 1px);
+          text-align: center;
+          white-space: nowrap;
+        }
+          .is-success {
+              background-color: #48c774;
+              color: #fff;
+            }
+          .is-fullwidth {
+              display: flex;
+              width: 100%;
+            }
+
+      </style>
+  </head>
+  <body>
+  <section class="section">
+    <div class="container">
+      <div class="card  column is-half is-offset-one-quarter">
+          <div class="card-header notification text-center is-success">
+              Estimado {{ nombre.get_full_name }}:
+          </div>
+          <div class="card-content notification is-success is-light">
+              <div class="text-muted text-center mt-2 mb-3">
+                Se ha generado una orden de servicio a su cargo.
+                  <div class="dropdown-divider"></div>
+                  <div class="text-center text-muted mb-4">
+                  <p>Motivo de ingreso: {{ motivo }}</p>
+                  <p>Observaciones: {{ observaciones }}</p>
+                  <div class="dropdown-divider"></div>
+                  <p>
+                      Para revisar la orden por favor ingresa al sistema.
+                  </p>
+                      <div class="dropdown-divider"></div>
+                  <a class="button is-success is-fullwidth" href="">INGRESAR</a>XC RDF WRGSe  
+              </div>
+              </div>
+
+          </div>
+      </div>
+    </div>
+  </section>
+  </body>
+</html>

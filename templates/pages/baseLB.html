@@ -1,0 +1,44 @@
+{% load fontawesome_5 %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Static assets - Used to load the Favicon -->
+{% load static %}
+
+<head>
+{% fontawesome_5_static %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    {% block title %} SISTEMAS - CDC {% endblock %}
+  </title>
+  <!-- Favicon - loaded as static -->
+  <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/js/plugins/DataTables/css/dataTables.bootstrap4.min.css"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/js/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+  <!-- Icons -->
+  <link href="/static/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="/static/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="/static/assets/js/plugins/jquery-datetimepicker/css/jquery.datetimepicker.css" rel="stylesheet" />
+<!--Materialize-->
+
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+<body>
+{% block content %}
+
+{% endblock content %}
+
+{% include "dati_taller/../includes/scripts.html" %}
+{% load sweetify %}
+{% sweetify %}
+</body>
+</html>

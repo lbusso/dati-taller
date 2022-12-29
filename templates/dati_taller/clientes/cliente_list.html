@@ -1,0 +1,95 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Clientes {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-dark mb-0 float-left">Lista de clientes.</h3>
+                <a href="" onclick="return abrir_modal('{% url 'cliente_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table id="lista-pendiente" class="table align-items-center table-light table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Box</th>
+                    <th scope="col">Interno</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for cliente in object_list %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3 bg-info">
+                          <i class=" ni ni-single-02"></i>
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ cliente.apellido }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{ cliente.nombre }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ cliente.box }}
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+                          {{ cliente.interno }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">
+                            {{ cliente.mail }}
+                        </span>
+                      </div>
+                    </td>
+                    <td class="text-right">
+                      <a href="#" onclick="return abrir_modal('{% url 'cliente_edit' cliente.pk %}')" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings-gear-65"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+<div class="dropdown-divider pt-7"></div>
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+     <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+    });
+    </script>
+{% endblock javascripts %}

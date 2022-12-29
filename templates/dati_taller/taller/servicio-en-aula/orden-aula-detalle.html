@@ -1,0 +1,123 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Detalles {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-white mb-0 float-left">Orden de servicio en aula.</h2>
+            </div>
+              <div class="card-body row">
+              <div class="card col-sm-8">
+                  <div class="card-header bg-gradient-lighter">
+
+                      {% if orden.estado == 'Pendiente' %}
+                      <div class=" icon icon-shape bg-gradient-danger text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="PENDIENTE">
+                          {% elif orden.estado == 'En Proceso' %}
+                          <div class=" icon icon-shape bg-gradient-warning text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="EN PROCESO">
+                          {% else %}
+                          <div class=" icon icon-shape bg-gradient-success text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="TERMINADO">
+                          {% endif %}
+                      </div>
+
+                      <h2>Detalles de la orden.</h2>
+                      <h3>Tecnico: {{ orden.tecnico }} </h3>
+                  </div>
+
+                  <div class="row">
+                       <!--INFORMACION DEL EQUIPO-->
+                      <div class="col">
+                      <div class="card card-stats">
+                    <!-- Card body -->
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Informacion del pedido</h5>
+                            <div class="dropdown-divider"></div>
+                            <span class="h2 font-weight-bold mb-0"> </span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                              <i class="fas fa-home"></i>
+                          </div>
+                        </div>
+                    </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fas fa-house-damage"></i> - {{ orden.aula }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-notes-medical"></i> - {{ orden.motivo }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="ni ni-calendar-grid-58"></i> - {{ orden.fecha }} </span>
+                            </p>
+                        <p></p>
+                            <p>
+                                {% if orden.equipo.en_reparacion %}
+                                    <i class="icon icon-shape bg-danger text-white rounded-circle shadow align-items-center fas fa-exclamation-triangle" data-toggle="tooltip" data-placement="left" title="Equipo en reparacion"></i>
+                      {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <!--Informes de tecnicos sobre el servicio-->
+                  <div class="card text-center">
+                  <div class="card-header bg-gradient-lighter"><h2> Informes</h2>
+                  </div>
+                  {% if orden.informeaula_set.count != 0 %}
+                      {% for informe in informes %}
+                      <div class="col-auto" style="text-align: center; margin: 5px">
+                          <i class="icon icon-shape bg-translucent-warning text-white rounded-circle shadow align-items-center fas fa-clipboard-list"></i>
+                      </div>
+                    <div class="card card-stats col-auto bg-gradient-secondary">
+                <!-- Card body -->
+                <div class="card-body">
+                    <h2>Tecnico: {{ informe.tecnico }}</h2>
+                    <div class="dropdown-divider"></div>
+                    <div class="col-auto">
+                        <h3 class="card-title text-black-50">Informe:</h3>
+                        <p class="text-dark">{{ informe.informe }}</p>
+                    </div>
+                           <div class="dropdown-divider"></div>
+                <h3>{{ informe.fecha}}</h3>
+            </div>
+                </div>
+                      {% endfor %}
+                      {% else %}
+                      <h2 class="bg-translucent-warning">Aún no hay informes</h2>
+                  {% endif %}
+                    </div>
+                </div>
+              <div class="col-4 card ">
+                  <div class="card-header bg-gradient-lighter">
+                      <h3>Acciones</h3>
+                  </div>
+                  <div class="card-body">
+                      <button class="btn btn-block bg-gradient-warning text-white" onclick="abrir_modal('{% url 'servicio_aula_informe' orden.pk %}')"> Actualizar Orden <i class="rounded-circle ni ni-align-left-2 ni-2x float-right"></i></button>
+                      <button class="btn btn-block bg-gradient-indigo text-white" onclick="abrir_modal('{% url 'servicio_aula_transferir' orden.pk %}')">Transferir Orden  <i class="rounded-circle ni ni-user-run ni-2x float-right"></i></button>
+                      <button class="btn btn-block bg-gradient-success text-white" onclick="abrir_modal('{% url 'servicio_aula_terminar' orden.pk %}')">Finalizar Orden <i class="rounded-circle ni ni-check-bold ni-2x float-right"></i></button>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </div>
+
+      </div>
+<div class="dropdown-divider pt-7"></div>
+     {% include "includes/footer.html" %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}
+</div>

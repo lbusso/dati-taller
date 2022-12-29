@@ -1,0 +1,102 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Detalles Eventos  {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-gradient-light">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="mb-0 float-left">Evento.</h2>
+            </div>
+              <div class="card-body row">
+              <div class="card col-sm-8">
+                  <div class="card-header bg-gradient-lighter">
+                      {% if orden.terminado == False %}
+                      <div class=" icon icon-shape bg-gradient-danger text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="PENDIENTE">
+                          {% else %}
+                          <div class=" icon icon-shape bg-gradient-success text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="TERMINADO">
+                          {% endif %}
+                      </div>
+
+                      <h2>Detalles del Evento.</h2>
+                      <h3>Tecnico: {{ orden.tecnico }} </h3>
+                  </div>
+
+                  <div class="row">
+                       <!--INFORMACION DEL EQUIPO-->
+                      <div class="col">
+                      <div class="card card-stats">
+                    <!-- Card body -->
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Informacion del Evento </h5>
+                            <div class="dropdown-divider"></div>
+                            <span class="h2 font-weight-bold mb-0"> </span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                              <i class="fas fa-home"></i>
+                          </div>
+                        </div>
+                    </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fas fa-house-damage"></i> - {{ orden.aula }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-notes-medical"></i> - {{ orden.titulo }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="ni ni-calendar-grid-58"></i> - {{ orden.fecha }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                        <span class="h2 font-weight-bold mb-0"> <i class="fa fa-list"></i> Lista de elementos necesarios </span>
+                                <ul class="list-group">
+                                    {% for item in orden.lista_elementos.all %}
+                                        <li class="list-group-item list-group-item-action"> {{ item }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </p>
+                        <p></p>
+                            <p>
+                                {% if orden.equipo.en_reparacion %}
+                                    <i class="icon icon-shape bg-danger text-white rounded-circle shadow align-items-center fas fa-exclamation-triangle" data-toggle="tooltip" data-placement="left" title="Equipo en reparacion"></i>
+                      {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <!--Informes de tecnicos sobre el servicio-->
+
+                </div>
+              <div class="col-4 card ">
+                  <div class="card-header bg-gradient-lighter">
+                      <h3>Acciones</h3>
+                  </div>
+                  <div class="card-body">
+                      <button class="btn btn-block bg-gradient-indigo text-white" onclick="abrir_modal('{% url 'evento_transferir' orden.pk %}')">Transferir Evento  <i class="rounded-circle ni ni-user-run ni-2x float-right"></i></button>
+                      <button class="btn btn-block bg-gradient-danger text-white" onclick="abrir_modal('{% url 'evento_edit' orden.pk %}')">Editar Evento  <i class="rounded-circle ni ni-settings ni-2x float-right"></i></button>
+                      <button class="btn btn-block bg-gradient-success text-white" onclick="abrir_modal('{% url 'evento_terminar' orden.pk %}')">Finalizar Evento <i class="rounded-circle ni ni-check-bold ni-2x float-right"></i></button>
+                  </div>
+              </div>
+          </div>
+          </div>
+        </div>
+
+      </div>
+<div class="dropdown-divider pt-7"></div>
+      {% include "includes/footer.html" %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}

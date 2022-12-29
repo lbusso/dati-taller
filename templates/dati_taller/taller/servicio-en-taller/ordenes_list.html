@@ -1,0 +1,113 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Ordenes en Taller {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light" style="padding: 5px">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-dark mb-0 float-left">Ordenes de servicios en taller pendientes.</h2>
+                <a href="" onclick="return abrir_modal('{% url 'orden_create' %}')" class="avatar rounded-circle mr-1 bg-translucent-success float-right">
+                    <i class=" ni ni-fat-add ni-2x"></i>
+                </a>
+            </div>
+              <div class="table-responsive ">
+              <table id="lista-pendiente" class="table align-items-center table-light table-striped" >
+                <thead class="thead-light">
+                  <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Equipo</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Box</th>
+                    <th scope="col">Tecnico</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Fecha de Ingreso</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for orden in ordenes %}
+                    <tr class="text-center">
+                    <td><a href="#" class="rounded-circle bg-info">
+                          <i class="ni ni-sound-wave ni-2x"></i>
+                        </a></td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ orden.equipo.codigo }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{ orden.cliente }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ orden.cliente.box }}
+                      </span>
+                    </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ orden.tecnico }}
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+                          {{orden.motivo_ingreso}}
+                      </span>
+                    </td>
+                    <td>
+                        {{ orden.fecha_ingreso | date:'d-m-y H:i' }}
+                    </td>
+                        {% if orden.equipo.en_reparacion == True %}
+                        <td class="bg bg-gradient-info"><h4 class="text-white">Enviado a reparar </h4></td>
+                        {% else %}
+                            {% if orden.estado == 'Pendiente' %}
+                            <td class="bg bg-gradient-danger"><h4 class="text-white">{{ orden.estado }}</h4></td>
+                                {% elif orden.estado == 'En Proceso' %}
+                            <td class="bg bg-gradient-warning"><h4 class="text-white">{{ orden.estado }}</h4></td>
+                                {% else %}
+                            <td class="bg bg-gradient-success"><h4 class="text-white">{{ orden.estado }}</h4></td>
+                            {% endif %}
+                        {% endif %}
+                    <td class="text-center">
+                      <a href="{% url 'orden_detail' orden.pk %}" onclick="" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings"></i>
+                        </a>
+                        <a href="#" onclick="return abrir_modal('{% url 'orden_entregar' orden.pk %}')" class="avatar mr-3 rounded-circle bg-gradient-success">
+                          <i class="fa fa-truck"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown-divider pt-7"></div>
+          {% include "includes/footer.html" %}
+
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+    <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+
+    });
+    </script>
+
+{% endblock javascripts %}

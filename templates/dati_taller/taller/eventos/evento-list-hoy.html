@@ -1,0 +1,101 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Eventos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-dark mb-0 float-left">Eventos Previstos para el dia de Hoy.</h2>
+                 <a href="{% url 'evento_list' %}" class="btn btn-info float-right p--2">Ver Todos los eventos</a>
+                <a href="" onclick="return abrir_modal('{% url 'evento_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-2x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table id="lista-pendiente" class="table align-items-center table-light table-flush">
+                <thead class="thead-light">
+                  <tr class="text-center">
+                    <th scope="col">Hora</th>
+                      <th scope="col">Fecha</th>
+                    <th scope="col">Titulo</th>
+                    <th scope="col">Aula</th>
+                    <th scope="col">Tecnico</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {%  if servicio %}
+                {% for servicio in servicio %}
+                    <tr class="text-center">
+                    <td><a href="#" class="avatar rounded-circle bg-info">
+                          <span class="mb-0 text-sm">{{ servicio.hora }}</span>
+                        </a></td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ servicio.fecha}}
+                      </span>
+                    </td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ servicio.titulo }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{ servicio.aula }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ servicio.tecnico }}
+                      </span>
+                    </td>
+                        <td class="bg-gradient-danger">
+                            <span>
+                                {{ servicio.terminado | yesno:"Terminado, Pendiente"}}
+                            </span>
+                        </td>
+
+                    <td class="text-center">
+                      <a href="{% url 'evento_detail' servicio.pk %}" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings"></i>
+                        </a>
+                        <a href="#" onclick="abrir_modal('{% url 'evento_terminar' servicio.pk %}')" class="avatar rounded-circle mr-3 bg-gradient-success">
+                          <i class="fa fa-check-square"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                {% else %}
+                <h3>No hay eventos para el dia de Hoy</h3>
+                {% endif %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <div class="dropdown-divider pt-7"></div>
+     {% include "includes/footer.html" %}
+
+    </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+    <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+    });
+    </script>
+{% endblock javascripts %}

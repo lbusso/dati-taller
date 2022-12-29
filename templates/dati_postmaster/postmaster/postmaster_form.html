@@ -1,0 +1,133 @@
+{% extends 'dati_postmaster/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load fontawesome_5 %}
+
+{% block content %}
+    <div class="dropdown" style="text-align: right; margin-right: 2%;">
+        <button class="btn btn-secondary dropdown-toggle bg-postmaster" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <span>{% fa5_icon 'user' size='fa-lg' %} - {{ request.user }}</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'home' %}">Menú Sistemas</a></li>
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'postmaster_list' %}">Ver Historial</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'logout' %}">Salir</a></li>
+        </ul>
+      </div>
+    <br>
+    <div class="container align-center">
+        <div class="jumbotron-fluid ">
+        <form method="post" class="form-control" enctype="multipart/form-data">
+            {{ form.media }}
+            {% csrf_token %}
+        <div class="row g-4 py-2 row-cols-1 row-cols-lg-2 justify-content-center">
+            {% if 'dati_postmaster.is_FICA' in perms %}
+        <div class="col" style="width: 30%">
+          <img src="{% static 'assets/images/FICA-LOGO.png' %}" class="card-img-top" alt="FICA" style="max-width: 20%; min-width: 20%; margin-left: 40%;">
+          <div class="card-body">
+              <h5>Destino</h5>
+            <ol class="list-group">
+                {% if 'dati_postmaster.is_secretario_fica' in perms %}
+                <li class="list-group-item tamaño-chico">{{ form.para_doc_fica | as_crispy_field }}</li>
+                <li class="list-group-item tamaño-chico">{{ form.para_nodoc_fica | as_crispy_field }}</li>
+                <li class="list-group-item tamaño-chico">{{ form.para_grad_fica | as_crispy_field }}</li>
+                    {% else %}
+                    <li class="list-group-item tamaño-chico">Estos destinos no esstan habilitados</li>
+                    {% endif %}
+                <br>
+                <h5>Docentes por departamentos</h5>
+                <div id="deptos-fica-group" name="dptos-fica">
+                    <ul class="list-group">
+                        {% if 'dati_postmaster.is_dep_ingenieria' in perms %}
+                            <li class="list-group-item tamaño-chico">{{ form.dpto_ingenieria | as_crispy_field}}</li>
+                        {% endif %}
+
+                       {% if 'dati_postmaster.is_dep_basica' in perms %}
+                            <li class="list-group-item tamaño-chico">{{ form.dpto_basicas | as_crispy_field}}</li>
+                           {% endif %}
+
+                       {% if 'dati_postmaster.is_dep_procesos' in perms %}
+                                <li class="list-group-item tamaño-chico ">{{ form.dpto_proceso | as_crispy_field}}</li>
+                       {% endif %}
+
+                    {% if 'dati_postmaster.is_dep_agropecuaria' in perms %}
+                        <li class="list-group-item tamaño-chico ">{{ form.dpto_agropecuarias | as_crispy_field}}</li>
+                    {% endif %}
+                </ul>
+                </div>
+            </ol>
+          </div>
+        </div>
+        {% endif %}
+        {% if 'dati_postmaster.is_FCEJS' in perms %}
+        <div class="col" style="width: 30%">
+            <img src="{% static 'assets/images/FCEJS-LOGO.png' %}" class="card-img-top" alt="FCEJS" style="max-width: 20%; min-width: 20%; margin-left: 40%;">
+          <div class="card-body">
+            <h5>Destino</h5>
+            <ol class="list-group">
+                {% if 'dati_postmaster.is_secretario_fcejs' in perms %}
+                <li class="list-group-item tamaño-chico">{{ form.para_doc_fcejs | as_crispy_field }}</li>
+                <li class="list-group-item tamaño-chico">{{ form.para_nodoc_fcejs | as_crispy_field }}</li>
+                <li class="list-group-item tamaño-chico">{{ form.para_grad_fcejs | as_crispy_field }}</li>
+                    {% else %}
+                    <li class="list-group-item tamaño-chico">Estos destinos no esstan habilitados</li>
+                {% endif %}
+                <br>
+                <h5>Docentes por departamentos</h5>
+                <div id="deptos-fcejs-group" name="dptos-fcejs">
+                <ul class="list-group">
+                    {% if 'dati_postmaster.is_dep_economicas' in perms %}
+                    <li class="list-group-item tamaño-chico">{{ form.dpto_economicas | as_crispy_field}}</li>
+                        {% endif %}
+                    {% if 'dati_postmaster.is_dep_sociales' in perms %}
+                    <li class="list-group-item tamaño-chico">{{ form.dpto_sociales | as_crispy_field}}</li>
+                        {% endif %}
+                    {% if 'dati_postmaster.is_dep_juridicas' in perms %}
+                    <li class="list-group-item tamaño-chico">{{ form.dpto_juridicas | as_crispy_field}}</li>
+                    {% endif %}
+                </ul>
+                </div>
+            </ol>
+          </div>
+        </div>
+        {% endif %}
+        </div>
+            <div class="form-control text-center">
+                <div class="col-auto p-3 text-center font-weight-300">{{ form.subject | as_crispy_field }}</div>
+                <div class="d-block text-center font-weight-bold">{{ form.mensaje  | as_crispy_field | safe}}</div>
+            <div class="d-block font-weight-bold" style="padding-top: 1%; padding-bottom: 1%">{{ form.file  | as_crispy_field }}</div>
+            </div>
+            <div class="d-grid gap-2 p-3">
+                <button type="submit" class="btn bg-postmaster text-white">Enviar</button>
+            </div>
+    </form>
+    </div>
+    <br>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+    document.getElementById('id_para_doc_fica').addEventListener('click', function(e) {
+    var nodes = document.getElementById("deptos-fica-group").getElementsByTagName('*');
+
+        for(var i = 0; i < nodes.length; i++){
+        nodes[i].disabled = this.checked;
+        nodes[i].checked = false;
+    }
+});
+</script>
+<script>
+    document.getElementById('id_para_doc_fcejs').addEventListener('click', function(e) {
+    var nodes = document.getElementById("deptos-fcejs-group").getElementsByTagName('*');
+
+        for(var i = 0; i < nodes.length; i++){
+        nodes[i].disabled = this.checked;
+        nodes[i].checked = false;
+    }
+});
+</script>
+{% endblock scripts %}
+    
+{% load sweetify %}

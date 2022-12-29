@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+</head>
+
+<body style="text-align: center;">
+    <div style="background: linear-gradient(149deg, #000 0%, #fff 100%);display: flex; justify-content: center; text-align: center;">
+
+        <div class="card" style="width: 60%; border-radius: 40px; background: whitesmoke;justify-content: center;text-align: center;margin-left: auto; margin-right:auto;">
+<h1 style="">Postmaster</h1>
+            <div class="card-body" style="text-align: center;">
+                <span>{{ fecha }}</span>
+                <h2>{{ subject }}</h2>
+                <div>
+                    {{ mensaje | safe }}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

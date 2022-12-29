@@ -1,0 +1,25 @@
+{% load crispy_forms_tags %}
+{% load fontawesome_5 %}
+<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-light text-gray">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Reenviar</h6>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    {% fa5_icon 'send' size='fa-lg' %}
+                    <h4 class="heading mt-4">Atencion!</h4>
+                        <form method="post" action="{% url 'postmaster_reenviar' mail.pk %}">{% csrf_token %}
+                            <div class="form-group text-center">
+                                <h3>Estas seguro de reenviar este email?</h3>
+                                <div style="display: none">{{ form | crispy }}</div>
+                            </div>
+                            <div class="modal-footer align-start">
+                            </div>
+                            <button type="submit" class="btn btn-outline-danger float-left">Si, Enviar!</button>
+                            <button type="button" class="btn btn-outline-info" data-dismiss="modal">Mejor espero</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+</div>

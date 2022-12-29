@@ -1,0 +1,49 @@
+{% extends 'layouts/base.html' %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargos</title>
+</head>
+<body>
+{%  block content %}
+<table id="lista-pendiente">
+    <thead>
+    <tr>
+        <th>Cargo</th>
+        <th>personal</th>
+        <th>dedicacion</th>
+        <th>caracter</th>
+        <th>area</th>
+        <th>departamento</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    {% for cargo in cargos %}
+        <tr>
+            <td>{{ cargo.cargo }}</td>
+        <td>{{ cargo.personal }}</td>
+        <td>{{ cargo.dedicacion }}</td>
+        <td>{{ cargo.caracter }}</td>
+        <td>{{ cargo.area }}</td>
+        <td>{{ cargo.departamento }}</td>
+        </tr>
+    {%  endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}
+
+{% block javascripts %}
+    <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+
+    });
+    </script>
+
+{% endblock javascripts %}

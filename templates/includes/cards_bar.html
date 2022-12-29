@@ -1,0 +1,90 @@
+          <!-- Card stats -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0"><a href="{% url 'orden_list' %}">Servicios en taller</a> </h5>
+                      <span class="h2 font-weight-bold mb-0"> {{ card_orden.count }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                        <a class="text-white" href="{% url 'orden_list' %}"><i class="fas fa-screwdriver"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-check"></i> Resueltas por el equipo {{ card_orden_resuelto.count }}</span>
+                    <span class="text-nowrap"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0"><a href="{% url 'domicilio_list' %}">Servicios a domicilios</a>  </h5>
+                      <span class="h2 font-weight-bold mb-0">{{ card_domicilio.count }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                        <a class="text-white" href="{% url 'domicilio_list' %}"><i class="fas fa-home"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-check"></i> Resueltas por el equipo {{ card_domicilio_resuelto.count }}</span>
+                    <span class="text-nowrap"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0"><a href="{% url 'servicio_aula_list' %}">Servicio en aula</a></h5>
+                      <span class="h2 font-weight-bold mb-0">
+                          {{ card_aula.count }}
+                      </span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-pink text-white rounded-circle shadow">
+                        <a class="text-white" href="{% url 'servicio_aula_list' %}"> <i class="fas fa-cubes"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-check"></i> Resueltas por el equipo {{ card_aula_resuelto.count }}</span>
+                    <span class="text-nowrap"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6">
+              <div class="card card-stats mb-4 mb-xl-0">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col">
+                      <h5 class="card-title text-uppercase text-muted mb-0"><a href="{% url 'evento_list' %}">Eventos pendientes</a>
+                      </h5>
+                      <span class="h2 font-weight-bold mb-0">{{ card_evento.count }}</span>
+                    </div>
+                    <div class="col-auto">
+                      <div class="icon icon-shape bg-indigo text-white rounded-circle shadow">
+                        <a class="text-white" href="{% url 'evento_list' %}"><i class="fas fa-calendar-check"></i></a>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-check"></i> Resueltas por el equipo {{ card_evento_resuelto.count }}</span>
+                    <span class="text-nowrap"></span>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>

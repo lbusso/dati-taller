@@ -1,0 +1,52 @@
+{% extends 'dati_taller/../layouts/base.html' %}
+
+{% block title %} Inicio {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block cards %}
+{% endblock cards %}
+{% block sidebar %}
+{% endblock sidebar %}
+
+{% block content %}
+    <!-- Header -->
+    <div class="container-fluid mt--7">
+     <div class="col text-white text-center">
+    <h1 class="display-1  text-white">Sistema Integral Centro de Computos</h1>
+    </div>
+      <div class="tab">
+          <div class="row">
+              <div class="col-6 bg-gradient-info text-center">
+                <h1 class="text-center text-white">Area de Taller</h1>
+                  <a  href="{%url 'orden_list' %}" class="btn btn-large fa fa-toolbox fa fa-4x text-white" style="font-size:70px;"></a>
+              </div>
+              <div class="col-6 bg-gradient-warning text-center">
+                  <h1 class="text-center text-white">Sistema de prestamos</h1>
+                   <a href="{% url 'prestamo_list' %}" class="btn btn-large ni ni-send  text-white" style="font-size:70px;"></a>
+              </div>
+              </div>
+          </div>
+          <div class="dropdown-divider"></div>
+          <div class="row">
+              <div class="col-6 bg-gradient-danger text-center">
+                <h1 class="text-center text-white">General</h1>
+                  <i class="btn btn-large ni ni-settings text-white" style="font-size:70px;"></i>
+              </div>
+              <div class="col-6 bg-gradient-indigo text-center">
+                <h1 class="text-center text-white">Modulo en construcción</h1>
+                  <i class="btn btn-large ni ni-sound-wave text-white" style="font-size:70px;"></i>
+              </div>
+              </div>
+              </div>
+          </div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

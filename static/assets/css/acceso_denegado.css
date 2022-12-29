@@ -1,0 +1,99 @@
+/*
+ * Globals
+ */
+* {
+  margin:0;
+  padding: 0;
+}
+body{
+  background: #233142;
+
+}
+.whistle{
+  width: 20%;
+  fill: #f95959;
+  margin: 100px 40%;
+  text-align: left;
+  transform: translate(-50%, -50%);
+  transform: rotate(0);
+  transform-origin: 80% 30%;
+  animation: wiggle .2s infinite;
+}
+
+@keyframes wiggle {
+  0%{
+    transform: rotate(3deg);
+  }
+  50%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(3deg);
+  }
+}
+h1{
+  margin-top: -100px;
+  margin-bottom: 20px;
+  color: #facf5a;
+  text-align: center;
+  font-family: 'Raleway';
+  font-size: 90px;
+  font-weight: 800;
+}
+h2{
+  color: #455d7a;
+  text-align: center;
+  font-family: 'Raleway';
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+/* Custom default button */
+.btn-secondary,
+.btn-secondary:hover,
+.btn-secondary:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+body {
+  text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+  padding: .25rem 0;
+  font-weight: 700;
+  color: rgba(255, 255, 255, .5);
+  background-color: transparent;
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+

@@ -1,0 +1,170 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Detalles {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-white mb-0 float-left">Orden de servicio en taller.</h2>
+            </div>
+              <div class="card-body row">
+              <div class="card col-sm-8">
+                  <div class="card-header bg-gradient-lighter">
+                      {% if orden.estado == 'Pendiente' %}
+                      <div class=" icon icon-shape bg-gradient-danger text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="PENDIENTE">
+                          {% elif orden.estado == 'En Proceso' %}
+                          <div class=" icon icon-shape bg-gradient-warning text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="EN PROCESO">
+                          {% else %}
+                          <div class=" icon icon-shape bg-gradient-success text-white rounded-circle shadow float-right" data-toggle="tooltip" data-placement="left" title="TERMINADO">
+                          {% endif %}
+                      </div>
+
+                      <h2>Detalles de la orden.</h2>
+                      <h3>Tecnico: {{ orden.tecnico }} </h3>
+                  </div>
+
+                  <div class="row">
+                       <!--INFORMACION DEL CLIENTE-->
+                      <div class="col">
+                      <div class="card card-stats">
+                    <!-- Card body -->
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Informacion del Cliente</h5>
+                            <div class="dropdown-divider"></div>
+                            <span class="h2 font-weight-bold mb-0">{{ orden.cliente }} </span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                              <i class="fas fa-user-circle"></i>
+                          </div>
+                        </div>
+                    </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-house-damage"></i> - {{ orden.cliente.box }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-phone"></i> - {{ orden.cliente.interno }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="ni ni-email-83"></i> - {{ orden.cliente.mail }} </span>
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                       <!--INFORMACION DEL EQUIPO-->
+                      <div class="col">
+                      <div class="card card-stats">
+                    <!-- Card body -->
+                        <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h5 class="card-title text-uppercase text-muted mb-0">Informacion del equipo</h5>
+                            <div class="dropdown-divider"></div>
+                            <span class="h2 font-weight-bold mb-0">{{ orden.equipo.tipo }} </span>
+                        </div>
+                        <div class="col-auto">
+                          <div class="icon icon-shape bg-red text-white rounded-circle shadow">
+                              <i class="fas fa-desktop"></i>
+                          </div>
+                        </div>
+                    </div>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-barcode"></i> - {{ orden.equipo.codigo }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-notes-medical"></i> - {{ orden.motivo_ingreso }} </span>
+                            </p>
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="ni ni-calendar-grid-58"></i> - {{ orden.fecha_ingreso }} </span>
+                            </p>
+                        {% if orden.observaciones %}
+                            <p class="mt-3 mb-0 text-sm">
+                                <span class="h2 font-weight-bold mb-0"> <i class="fa fa-text-height"></i> - {{ orden.observaciones }} </span>
+                            </p>
+                        {% endif %}
+                        <p></p>
+                            <p>
+                                {% if orden.equipo.en_reparacion %}
+                                     <span class="h3 font-weight-bold mb-0"><i class="icon icon-shape bg-danger text-white rounded-circle shadow align-items-center fas fa-exclamation-triangle" data-toggle="tooltip" data-placement="left" title="Equipo en reparacion"></i> El Equipo se envió a: {{ orden.equipo.lugar_reparacion }}</span>
+                      {% endif %}
+                            </p>
+                        </div>
+                    </div>
+                  </div>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <!--Informes de tecnicos sobre el servicio-->
+                  <div class="card text-center">
+                  <div class="card-header bg-gradient-lighter"><h2> Informes</h2>
+                  </div>
+                  {% if orden.informetaller_set.count != 0 %}
+                      {% for informe in informes %}
+                      <div class="col-auto" style="text-align: center; margin: 5px">
+                          <i class="icon icon-shape bg-translucent-warning text-white rounded-circle shadow align-items-center fas fa-clipboard-list"></i>
+                      </div>
+                    <div class="card card-stats col-auto bg-gradient-secondary">
+                <!-- Card body -->
+                <div class="card-body">
+                    <h2>Tecnico: {{ informe.tecnico }}</h2>
+                    <div class="dropdown-divider"></div>
+                    <div class="col-auto">
+                        <h3 class="card-title text-black-50 ">Informe:</h3>
+                        <p class="text-dark text-center">{{ informe.informe }}</p>
+                    </div>
+                           <div class="dropdown-divider"></div>
+                <h3>{{ informe.fecha}}</h3>
+            </div>
+                </div>
+                      {% endfor %}
+                      {% else %}
+                      <h2 class="bg-translucent-warning">Aún no hay informes</h2>
+                  {% endif %}
+                    </div>
+                </div>
+              <div class="card col-sm-4">
+                  <div class="card-header bg-gradient-lighter">
+                      <h3>Acciones</h3>
+                  </div>
+                  <div class="card-body">
+                  {% if not orden.estado == 'Terminado' %}
+                      <button class="btn btn-block bg-gradient-warning text-white" onclick="abrir_modal('{% url 'orden_informe' orden.pk %}')"> Actualizar Orden <i class="rounded-circle ni ni-align-left-2 ni-2x float-right"></i></button>
+                      {% if orden.informetaller_set.count != 0 %}
+                      <button class="btn btn-block bg-gradient-indigo text-white" onclick="abrir_modal('{% url 'orden_transferir' orden.pk %}')">Transferir Orden  <i class="rounded-circle ni ni-user-run ni-2x float-right"></i></button>
+                          {% else %}
+                          <button class="btn btn-block bg-gradient-indigo text-white" onclick="abrir_modal('{% url 'realizar_informe' %}')">Transferir Orden  <i class="rounded-circle ni ni-user-run ni-2x float-right"></i></button>
+                     {% endif %}
+                      {% if orden.equipo.en_reparacion == True %}
+                      <button class="btn btn-block bg-gradient-info text-white" onclick="abrir_modal('{% url 'orden_devolver_reparar' orden.equipo.pk %}')">Volver de reparar  <i class="rounded-circle fas fa-tools ni-2x float-right"></i></button>
+                      {% else %}
+                      <button class="btn btn-block bg-gradient-info text-white" onclick="abrir_modal('{% url 'orden_enviar_reparar' orden.equipo.pk %}')">Enviar a reparar  <i class="rounded-circle fas fa-tools ni-2x float-right"></i></button>
+                        {% endif %}
+                      <button class="btn btn-block bg-gradient-success text-white" onclick="abrir_modal('{% url 'orden_terminar' orden.pk %}')">Finalizar Orden <i class="rounded-circle ni ni-check-bold ni-2x float-right"></i></button>
+                  {% else %}
+                      <a href="{% url 'orden_list' %}" class="btn btn-block bg-gradient-success text-white"> Orden Terminada<i class="rounded-circle ni ni-align-left-2 ni-2x float-right"></i></a>
+                  {% endif %}
+                  </div>
+
+              </div>
+          </div>
+          </div>
+        </div>
+
+      </div>
+<div class="dropdown-divider pt-7"></div>
+      {% include "includes/footer.html" %}
+        </div>
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}{% endblock javascripts %}
+</div>

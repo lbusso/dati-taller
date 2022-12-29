@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+</head>
+
+<body>
+<style>
+	.grid {
+	display: grid;
+	grid-template-columns: 1fr 10fr 1fr;
+	grid-template-rows: 3fr;
+	grid-row-gap: 0px;
+	}
+
+	.container {
+		display:block;
+		text-align: right;
+  	}
+
+	.div1 { grid-area: 1 / 2 / 2 / 3; }
+	.div2 { grid-area: 2 / 2 / 3 / 3; }
+	.div3 { grid-area: 3 / 2 / 4 / 3; }
+
+	#border {
+	border: 3px solid #718691;
+	}
+	#borderradiustop {
+	border-radius: 10px 10px 0px 0px;
+	}
+	#borderradiusbotton {
+	border-radius: 0px 0px 10px 10px;
+	}
+</style>
+	<div class="grid">
+	<div id="borderradiustop" class="div1 container" style="background: linear-gradient(132deg, #718691 0%, #56666F 50%, #718691 100%)">
+		<div style="margin-left: 2%; margin-right: 2%; margin-top: 1%; margin-bottom: 1%;">
+			<img src="http://www.fica.unsl.edu.ar/wp-content/uploads/2020/11/LOGO-FICA-300x67.png" style="min-height: 10%; max-width: 30%; min-width: 30%;">
+		</div>
+	</div>
+	<div  id="border" class="div2">
+		<div style="margin: 2%">
+			<p align="justify"><font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" size="-1"><strong>{{ subject }}:</strong></font></p>
+			<p align="justify"><font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" size="-1">{{ mensaje | safe }}</font></p>
+		</div>
+	</div>
+	<div id="borderradiusbotton" class="div3" align="center" style="background: linear-gradient(132deg, #718691 0%, #56666F 50%, #718691 100%)">
+		<font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" color="#FFFFFF"><p>{{ firma.titulo }}, {{ firma.nombre }} </p>
+				<p>{{ firma.secretaria }}</p></font> 
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Equipos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-white mb-0 float-left">Resultado.</h2>
+                <a href="" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Tecnico</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for orden in object_list %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="{% url 'orden_detail' orden.id %}" class="avatar rounded-circle mr-3 bg-info">
+                          <span class="mb-0 text-sm">{{ orden.equipo }}</span>
+                        </a>
+                      </div>
+                    </th>
+                        <td>
+                            {{ orden.cliente }}
+                        </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ orden.fecha }}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div class="d-flex align-items-center">
+                          {% if orden.tecnico == "#N/A" %}
+                          <span class="mr-2">
+                            Sin Tecnico asignado
+                        </span>
+                          {% else %}
+                        <span class="mr-2">
+                            {{ orden.tecnico }}
+                        </span>
+                          {% endif %}
+                      </div>
+                    </td>
+                    <td class="text-left">
+                      <a href="{% url 'orden_detail' orden.id %}" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings-gear-65"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

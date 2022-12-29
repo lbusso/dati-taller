@@ -1,0 +1,100 @@
+{% load static %}
+  <!--   Core   -->
+  <script src="{% static 'assets/js/plugins/jquery/dist/jquery.min.js'%}"></script>
+  <script src="{% static 'assets/js/plugins/bootstrap/dist/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js' %}"></script>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+
+
+
+  <!--   Optional JS   -->
+  <script src="{% static 'assets/js/plugins/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/chart.js/dist/Chart.extension.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/jquery-datetimepicker/js/moment.js' %}"></script>
+  <script src="{% static 'assets/js/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+
+  <!-- Datatables -->
+    <script src="{% static 'assets/js/plugins/DataTables/js/jquery.dataTables.min.js' %}"></script>
+
+  <!--   G.Maps   -->
+  <!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script> -->
+
+  <!--   Argon JS   -->
+
+  <script>
+    function abrir_modal(url) {
+        $("#popup").load(url, function () {
+            $(this).modal({
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+
+
+    function cerrar_modal() {
+
+        $('#popup').modal('hide');
+        return false;
+    }
+
+
+    function abrir_modal_cliente(url) {
+        cerrar_modal()
+        $("#popup-2").load(url, function () {
+            $(this).modal({
+
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+
+    function cerrar_modal_cliente(){
+        $('#popup-2').modal('hide');
+        return false;
+    }
+
+    function abrir_modal_equipo(url) {
+
+        $("#popup-3").load(url, function () {
+            $(this).modal({
+
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+    function cerrar_modal_equipo(){
+
+        $('#popup-3').modal('hide');
+        return false;
+    }
+
+
+     function abrir_modal_aula(url) {
+        cerrar_modal()
+        $("#popup-2").load(url, function () {
+            $(this).modal({
+
+            })
+            $(this).modal('show');
+        });
+        return false;
+    }
+
+    function cerrar_modal_aula(){
+        $('#popup-2').modal('hide');
+        return false;
+    }
+  </script>
+
+
+
+  <!-- MENSAJES-->
+  <script>
+
+  </script>

@@ -1,0 +1,49 @@
+{% load crispy_forms_tags %}
+<div class="modal-dialog  modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-light text-dark">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Vamosa crear una nueva orden!</h6>
+                <button type="button" class="close" onclick="cerrar_modal()" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body text-dark">
+                <div class="py-3 text-center">
+                    <i class="fa fa-screwdriver fa-3x"></i>
+                    <h4 class="heading mt-4 text-dark">Nueva Orden de servicio en taller!</h4>
+                        <form method="post" action="{% url 'orden_create' %}">{% csrf_token %}
+                           <div class="form-row">
+                               <div class="form-group col-10 text-left">
+                                   {{ form.cliente | as_crispy_field }}
+                               </div>
+                               <div class="form-group inline-group text-center">
+                                   <a href="" onclick="return abrir_modal_cliente('{% url 'cliente_create_modal' %}')" class="btn btn-success btn-sm"><i class="fa fa-plus-circle "></i> </a>
+                               </div>
+                                    <div class="form-group col-10 text-left">
+                                   {{ form.equipo | as_crispy_field }}
+                               </div>
+                               <div class="form-group inline-group text-center">
+                                   <a href="" onclick="return abrir_modal('{% url 'equipo_create_modal' %}')" class="btn btn-success btn-sm"><i class="fa fa-plus-circle "></i> </a>
+                               </div>
+                                <div class="form-group col-10 text-left">
+                                   {{ form.tecnico | as_crispy_field }}
+                               </div>
+                                <div class="form-group col-10 text-left">
+                                   {{ form.motivo_ingreso | as_crispy_field }}
+                               </div>
+                                <div class="form-group col-10 text-left">
+                                   {{ form.observaciones | as_crispy_field }}
+                               </div>
+
+                           </div>
+                            <div class="modal-footer">
+                            <button type="submit" class="btn btn-white">Ok, Crear!</button>
+                            <button type="button" class="btn btn-link text-white ml-auto" onclick="cerrar_modal()">Cerrar</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+
+        </div>
+</div>
+

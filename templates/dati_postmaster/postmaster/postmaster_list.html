@@ -1,0 +1,71 @@
+{% extends 'dati_postmaster/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% load fontawesome_5 %}
+
+
+{% block content %}
+<div class="dropdown" style="text-align: right; margin-right: 2%;">
+        <button class="btn btn-secondary dropdown-toggle bg-postmaster" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {% fa5_icon 'user' size='fa-x7' %} <span> - {{ request.user }}</span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'postmaster_form' %}">Volver</a></li>
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'home' %}">Menú Sistemas</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item dropdown-postmaster" href="{% url 'logout' %}">Salir</a></li>
+        </ul>
+      </div>
+    <br>
+    <div class="container align-center">
+        <table id="table-postmaster" class="table table-hover">
+            <thead class="bg-postmaster text-white">
+                <tr class="text-center">
+                  <th scope="col" style="width: 50px">Fecha</th>
+                  <th scope="col">Destinatario/s</th>
+                  <th scope="col">Asunto</th>
+                  <th scope="col">Cuerpo del mail</th>
+                  <th scope="col">Reenviar</th>
+                  <th scope="col">Modificar</th>
+                </tr>
+              </thead>
+              <tbody class="text-center">
+              {% for mail in lista %}
+                <tr class="text-center">
+                  <td scope="row">{{ mail.fecha.date | date:'d-m-y' }}</td>
+                  <td scope="row">
+                     {{ mail.destinatarios }}
+                  </td>
+                  <td scope="row">{{ mail.subject }}</td>
+                  <td class="mail-content" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-html="true"
+                      title="{{ mail.mensaje  }}" > <strong>Ver Cuerpo del Mensaje</strong>
+                  </td>
+                    <td><a class="btn" onclick="abrir_modal('{% url 'postmaster_reenviar' mail.pk %}')">{% fa5_icon 'send' %}</a></td>
+                    <td><a class="btn" href="{% url 'postmaster_edit' mail.pk %}"> {% fa5_icon 'edit' %}</a></td>
+                </tr>
+              {% endfor %}
+              </tbody>
+        </table>  
+    </div>
+    <br>
+{% endblock content %}
+
+{% block scripts %}
+    <script>
+    $(document).ready(function () {
+          $(".mail-content").tooltip({
+            'selector': '',
+            'placement': 'top',
+            'container':'body'
+          });
+    });
+    </script>
+    <script>
+    $(document).ready(function() {
+        $('#table-postmaster').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+
+    });
+    </script>
+{% endblock %}

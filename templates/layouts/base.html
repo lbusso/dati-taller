@@ -1,0 +1,98 @@
+{% load fontawesome_5 %}
+{{ form.media }}
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- Static assets - Used to load the Favicon -->
+{% load static %}
+<head>
+{% fontawesome_5_static %}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+    {% block title %} SISTEMAS - CDC {% endblock %}
+  </title>
+ <!-- DATI CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/dati.css' %}"/>
+
+ <!-- TinyMCE -->
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/s82lb7r23pt48q2fseaaic37ytbacj4uvwgo14s8bqw57qb2/tinymce/6/plugins.min.js" referrerpolicy="origin"></script>
+   <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <!-- Favicon - loaded as static -->
+  <link href="{% static 'assets/img/brand/favicon.png' %}" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Data Tables -->
+    <link rel="stylesheet" type="text/css" href="/static/assets/js/plugins/DataTables/css/dataTables.bootstrap4.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script src="{% static 'assets/js/plugins/jquery-datetimepicker/js/moment.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/js/plugins/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css' %}"/>
+  <!-- Icons -->
+  <link href="/static/assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+  <link href="/static/assets/js/plugins/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="/static/assets/css/argon-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="/static/assets/js/plugins/jquery-datetimepicker/css/jquery.datetimepicker.css" rel="stylesheet" />
+<!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{% static 'assets/css/dati.css' %}"/>
+ <script src="{% static 'assets/js/plugins/sweetalert/sweetalert2.all.min.js' %}"></script>
+
+
+  <!-- Specific CSS goes HERE -->
+  {% block stylesheets %}{% endblock stylesheets %}
+
+</head>
+
+<!--SIDENAV-->
+
+<body class="main" style="padding: 0px">
+    {% block sidebar %}
+    {%include "includes/sidenav.html" %}
+    {% endblock sidebar %}
+  <div class="main-content">
+
+    {% block navigation %}
+       {% include "includes/navigation.html" %}
+    {% endblock navigation %}
+  {% block bg-navegation %}
+    <div class="header bg-taller pb-7 pt-5 pt-md-5">
+
+      <div class="container-fluid">
+        <div class="header-body">
+
+    {% block cards %}
+    {% include "includes/cards_bar.html" %}
+    {% endblock cards %}
+
+        </div>
+      </div>
+    </div>
+{% endblock %}
+
+    {% block content %}{% endblock content %}
+
+  <div class="modal fade" id="popup">
+
+  </div>
+  <div class="modal fade" id="popup-2"></div>
+  <div class="modal fade" id="popup-3"></div>
+
+
+  </div>
+
+  {% include "includes/scripts.html" %}
+
+
+  <!-- Specific JS goes HERE --> 
+  {% block javascripts %}{% endblock javascripts %}
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+{% load sweetify %}
+{% sweetify %}
+</body>
+
+</html>

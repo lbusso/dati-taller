@@ -1,0 +1,79 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+{% load fontawesome_5 %}
+
+{% block title %}
+    <title>DATI-SISTEMAS</title>
+{% endblock title %}
+
+{% block content %}
+<div class="dropdown" style="text-align: right; margin-right: 2%; margin-top: 2%;">
+  <button class="btn btn-secondary dropdown-toggle bg-gradient-h-dati" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <span>{% fa5_icon 'user' size='fa-lg' %} - {{ request.user }}</span>
+  </button>
+  <ul class="dropdown-menu">
+      {% if request.user.is_superuser %}
+      <li><a class="dropdown-item dropdown-dati" href="/admin">Administrador</a></li>
+          {% else %}
+          <li><a class="dropdown-item dropdown-dati disabled" href="/admin">Administrador</a></li>
+      {% endif %}
+      <li><hr class="dropdown-divider"></li>
+      <li><a class="dropdown-item dropdown-dati" href="{% url 'logout' %}">Salir</a></li>
+  </ul>
+</div>
+<div class="row row-cols-1 row-cols-md-4 justify-content-center" style="margin-top: 20px; width: 95%;">
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-header">
+        <img src='{% static 'assets/images/Taller-chico-DATI.png' %}' class="card-img-top" >
+      </div>
+      <div class="card-body">
+      <p>Sistema Taller para la administracón de ordenes de servicio de equipamiento, box y aulas. Reserva de equipamiento virtual.</p>
+        </div>
+        {% if 'dati_taller.is_tecnico' in perms %}
+            <h2 class="pb-2 border-bottom"></h2>
+            <a href="{% url 'orden_list' %}" class="btn bg-taller text-white">
+            Ingresar
+            </a>
+        {% endif %}
+
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-header">
+        <img src='{% static 'assets/images/Postmaster-chico-DATI.png' %}' class="card-img-top" >
+      </div>
+      <div class="card-body">
+      <p>Sistema Postmaster para el envío de correos electrónicos a diferentes dependencias de FICA-FCEJS.</p>
+      </div>
+        {% if 'dati_postmaster.send_postmaster' in perms %}
+         <h2 class="pb-2 border-bottom"></h2>
+          <a href="#" class="btn bg-postmaster text-white">
+              Ingresar
+          </a>
+         {% endif %}
+
+    </div>
+  </div>
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-header">
+        <img src='{% static 'assets/images/Aulero-chico-DATI.png' %}' class="card-img-top" >
+      </div>
+      <div class="card-body">
+        <p>Sistema para la administracion de horarios y resrva de aulas para las diferentes asignaturas de FICA-FCEJS.</p>
+      </div>
+        {% if 'dati_taller.is_tecnico' in perms %}
+          <h2 class="pb-2 border-bottom"></h2>
+            <a href="#" class="btn bg-aulero text-white">
+            Ingresar
+            </a>
+
+          {% endif %}
+    </div>
+  </div>
+</div>
+<br><br><br>
+
+{% endblock content %}

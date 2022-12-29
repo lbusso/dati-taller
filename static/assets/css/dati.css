@@ -1,0 +1,94 @@
+/*--------------------------------------------------- GAMA DE COLORES - DATI ---------------------------------------------------*/
+.bg-dati {
+  background-color: #105070 !important;
+}
+
+.bg-gradient-dati {
+  background: linear-gradient(135deg, #105070 0%, #1785BD 25%, #1DA9F0 50%, #66C3F2 75%, #A6E1EB 100%) !important;
+}
+
+.bg-gradient-h-dati {
+  background: linear-gradient(180deg, #105070 0%, #1785BD 70%) !important;
+}
+
+a.bg-dati:hover,
+a.bg-dati:focus,
+button.bg-dati:hover,
+button.bg-dati:focus {
+  background-color: #A6E1EB !important;
+}
+
+.dropdown-dati:hover{
+  background-color: #A6E1EB;
+}
+
+/*------------------------------------------------- GAMA DE COLORES - TALLER -------------------------------------------------*/
+.bg-taller {
+  background-color: #527980 !important;
+}
+
+.bg-gradient-taller {
+  background: linear-gradient(135deg, #527980 0%, #5D8080 25%, #7D9799 50%, #7D9997 75%, #81A6A0 100%) !important;
+}
+
+a.bg-taller:hover,
+a.bg-taller:focus,
+button.bg-taller:hover,
+button.bg-taller:focus {
+  background-color: #81A6A0 !important;
+}
+
+/*------------------------------------------------ GAMA DE COLORES - POSTMASTER------------------------------------------------*/
+.bg-postmaster {
+  background-color: #F56E2F !important;
+}
+
+.bg-gradient-postmaster {
+  background: linear-gradient(135deg, #F56E2F 0%, #FC9D47 25%, #E6AB4D 50%, #FCCA47 75%, #F5D745 100%) !important;
+}
+
+a.bg-postmaster:hover,
+a.bg-postmaster:focus,
+button.bg-postmaster:hover,
+button.bg-postmaster:focus {
+  background-color: #FC9D47 !important;
+}
+
+.dropdown-postmaster:hover{
+  background-color: #FC9D47;
+}
+
+/*--------------------------------------------------- GAMA DE COLORES - AULERO---------------------------------------------------*/
+.bg-aulero {
+  background-color: #D41D00 !important;
+}
+
+.bg-gradient-aulero {
+  background: linear-gradient(135deg, #D41D00 0%, #E10909 25%, #EB1B0C 50%, #EB380C 75%, #FF6229 100%) !important;
+}
+
+a.bg-aulero:hover,
+a.bg-aulero:focus,
+button.bg-aulero:hover,
+button.bg-aulero:focus {
+  background-color: #FF6229 !important;
+}
+
+/*-------------------------------------------------- GAMA DE COLORES - AULERO-M--------------------------------------------------*/
+.bg-aulerom {
+  background-color: #635C47 !important;
+}
+
+.bg-gradient-aulerom {
+  background: linear-gradient(135deg, #635C47 0%, #857A5E 25%, #B3A57F 50%, #CCBC91 75%, #EDDFB3 100%) !important;
+}
+
+a.bg-aulerom:hover,
+a.bg-aulerom:focus,
+button.bg-aulerom:hover,
+button.bg-aulerom:focus {
+  background-color: #857A5E !important;
+}
+.tamaño-chico{font-size: 14px}
+
+p{text-align: justify;}

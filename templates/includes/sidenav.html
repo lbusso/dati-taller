@@ -1,0 +1,182 @@
+{% load static %}
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+      <!-- User -->
+      <ul class="nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link nav-link-icon" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="ni ni-bell-55"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+
+            <div class="dropdown-divider"></div>
+
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="{% static 'assets/img/theme/team-1-800x800.jpg' %}">
+              </span>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <a href="" onclick="return abrir_modal('{% url 'logout' %}')" class="dropdown-item">
+              <i class="ni ni-user-run"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="">
+                <img src="/static/assets/img/brand/blue.png">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Form -->
+        <form class="mt-4 mb-3 d-md-none">
+          <div class="input-group input-group-rounded input-group-merge">
+            <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                <span class="fa fa-search"></span>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- Navigation -->
+      <ul class="navbar-nav">
+          <li class="nav-item {% if 'index' in segment %} active {% endif %}">
+          <a class=" nav-link" href="/"> <i class="ni ni-curved-next text-primary"></i> Menú Sistemas
+            </a>
+          </li>
+      </ul>
+        <!-- Divider -->
+        <hr class="my-3">
+        <!-- Taller -->
+        <h6 class="navbar-heading btn bg-gradient-dati text-white" data-toggle="collapse" data-target="#taller" aria-expanded="true" aria-controls="taller">Taller</h6>
+        <!-- Navigation -->
+        <ul id="taller" class="collapse show navbar-nav mb-md-3">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'orden_list' %}">
+              <i class="fa fa-screwdriver text-danger"></i>
+                Ordenes en Taller
+                {% if noti_taller.count != 0 %}
+                    <span class="icon-sm icon-shape bg-danger text-white rounded-circle" style="margin-left: 10px"> {{ noti_taller.count }}</span>
+                {% endif %}
+            </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link " href="{% url 'domicilio_list' %}">
+              <i class="fa fa-home text-orange"></i> Ordenes de servicio a domicilio
+                {% if noti_domicilio.count != 0 %}
+                    <span class="icon-sm icon-shape bg-danger text-white rounded-circle" style="margin-left: 10px"> {{ noti_domicilio.count }}</span>
+                {% endif %}
+                </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link " href="{% url 'servicio_aula_list' %}">
+              <i class="fa fa-cubes text-pink"></i> Ordenes de servicio en Aula
+                {% if noti_aula.count != 0 %}
+                    <span class="icon-sm icon-shape bg-danger text-white rounded-circle" style="margin-left: 10px"> {{ noti_aula.count }}</span>
+                {% endif %}
+            </a>
+          </li>
+            <li class="nav-item">
+            <a class="nav-link jus" href="{% url 'evento_list_hoy' %}">
+              <i class="fa fa-calendar-check text-purple"></i> Eventos
+                {% if noti_evento.count != 0 %}
+                    <span class="icon-sm icon-shape bg-danger text-white rounded-circle" style="margin-left: 10px"> {{ noti_evento.count }}</span>
+                {% endif %}
+            </a>
+          </li>
+        </ul>
+      <!-- Divider -->
+      <hr class="my-3">
+      <!-- General -->
+      <h6 class="navbar-heading btn bg-gradient-dati text-white" data-toggle="collapse" data-target="#general" aria-expanded="true" aria-controls="general">General</h6>
+        <ul id="general" class="collapse collapsed navbar-nav">
+          <li class="nav-item {% if 'icons' in segment %} active {% endif %}">
+            <a class="nav-link " href="{% url 'cliente_list' %}">
+              <i class="ni ni-circle-08 text-blue"></i> Clientes
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link " href="{% url 'aula_list' %}">
+              <i class="ni ni-pin-3 text-orange"></i> Aulas
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{% url 'equipo_list' %}">
+              <i class="fa fa-desktop text-yellow"></i> Equipos
+            </a>
+          </li>
+        </ul>
+        <!-- PRESTAMOS -->
+          <h6 class="navbar-heading btn bg-gradient-dati text-white" data-toggle="collapse" data-target="#prestamos" aria-expanded="true" aria-controls="prestamos">Prestamos</h6>
+            <ul id="prestamos" class="collapse collapsed navbar-nav">
+          <li class="nav-item {% if 'icons' in segment %} active {% endif %}">
+            <a class="nav-link " href="{% url 'prd_prestar_list' %}">
+              <i class="ni ni-camera-compact text-blue"></i> Productos para prestar
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a class="nav-link " href="{% url 'prestamo_list' %}">
+              <i class="ni ni-bullet-list-67 text-orange"></i> Prestamos
+            </a>
+          </li>
+            </ul>
+      <!-- sistema viejo -->
+      <!-- Divider -->
+      <hr class="my-3">
+      <!-- General
+      <h6 class="navbar-heading btn bg-gradient-dati text-white" data-toggle="collapse" data-target="#viejo" aria-expanded="true" aria-controls="viejo">Historial Antiguo</h6>
+        <ul id="viejo" class="collapse collapsed navbar-nav">
+          <li class="nav-item {% if 'icons' in segment %} active {% endif %}">
+          <div class="container text-center">
+              <h4>Consultar historial de sistema antiguo</h4>
+            <form class="d-flex" action="{% url 'old_client_result' %}" method="get" >
+                <div class="form-group">
+                    <label>
+                        <input class="form-control m-2" type="search" name="q" placeholder="Buscar Por Cliente">
+                    </label>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Buscar</button>
+                </div>
+           </form>
+              <div class="divider"></div>
+              <form class="d-flex" action="{% url 'old_equipo_result' %}" method="get" >
+                <div class="form-group">
+                    <label>
+                        <input class="form-control m-2" type="search" name="q" placeholder="Buscar Por N° Serie">
+                    </label>
+                    <button class="btn btn-outline-success btn-sm" type="submit">Buscar</button>
+                </div>
+           </form>
+          </div>
+          </li>
+        </ul>
+        -->
+      </div>
+    </div>
+  </nav>
+
+

@@ -1,0 +1,105 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Ordenes en Aula {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-dark mb-0 float-left">Ordenes de servicios en Aula pendientes.</h2>
+                <a href="" onclick="return abrir_modal('{% url 'servicio_aula_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-2x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table id="lista-pendiente" class="table align-items-center table-light table-flush">
+                <thead class="thead-light">
+                  <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Ticket</th>
+                    <th scope="col">Aula</th>
+                    <th scope="col">Tecnico</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Motivo</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for servicio in servicio %}
+                    <tr class="text-center">
+                    <td><a href="#" class="avatar rounded-circle bg-info">
+                          <i class="ni ni-sound-wave"></i>
+                        </a></td>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ servicio.ticket }}</span>
+                        </div>
+                      </div>
+                    </th>
+                    <td>
+                      {{ servicio.aula }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ servicio.tecnico }}
+                      </span>
+                    </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ servicio.fecha}}
+                      </span>
+                    </td>
+                    <td>
+                      <span>
+                          {{ servicio.motivo }}
+                      </span>
+                    </td>
+
+                        {% if servicio.estado == 'Pendiente' %}
+                        <td class="bg bg-gradient-danger"><h4 class="text-white">{{ servicio.estado }}</h4></td>
+                            {% elif servicio.estado == 'En Proceso' %}
+                        <td class="bg bg-gradient-warning"><h4 class="text-white">{{ servicio.estado }}</h4></td>
+                            {% else %}
+                        <td class="bg bg-gradient-success"><h4 class="text-white">{{ servicio.estado }}</h4></td>
+                        {% endif %}
+                    <td class="text-center">
+                      <a href="{% url 'servicio_aula_detail' servicio.pk %}" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings"></i>
+                        </a>
+                        <a href="#" onclick="abrir_modal('{% url 'servicio_aula_terminar' servicio.pk %}')" class="avatar rounded-circle mr-3 bg-gradient-success">
+                          <i class="fa fa-truck"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+<div class="dropdown-divider pt-7"></div>
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+   <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+    });
+    </script>
+{% endblock javascripts %}

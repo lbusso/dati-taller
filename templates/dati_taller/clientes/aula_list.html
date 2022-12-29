@@ -1,0 +1,79 @@
+{% extends 'layouts/base.html' %}
+
+
+{% block title %} Lista de Aulas {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light">
+            <div class="card-header bg-transparent border-0">
+              <h3 class="text-dark mb-0 float-left">Lista de Aulas.</h3>
+                <a href="" onclick="return abrir_modal('{% url 'aula_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table id="lista-pendiente" class="table align-items-center table-light table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Equipamiento</th>
+                    <th scope="col">Editar</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for aula in object_list %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3 bg-info">
+                          <i class="fa fa-building fa fa-2x"></i>
+
+                        </a>
+                        <div class="media-body">
+                          <span class="mb-0 text-sm">{{ aula.nombre }}</span>
+                        </div>
+                      </div>
+                    </th>
+                        <td>
+                            {% for icono in aula.equipamiento.all %}
+                            <a href="#" class="avatar rounded-circle mr-1 bg-gradient-warning"data-toggle="tooltip" data-placement="left" title={{ icono.nombre }}>{{ icono.icon.as_html }} </a>
+                                {% endfor %}
+                        </td>
+                    <td class="text-left">
+                      <a href="#" onclick="return abrir_modal('{% url 'aula_edit' aula.pk %}')" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings-gear-65"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <div class="dropdown-divider pt-7"></div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+     <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+    });
+    </script>
+{% endblock javascripts %}

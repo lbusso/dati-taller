@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Equipos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-white mb-0 float-left">Lista de Equipos.</h2>
+                <a href="" onclick="return abrir_modal('{% url 'prd_prestar_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for producto in object_list %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3 bg-info">
+                          <i class="ni ni-box-2"></i>
+                        </a>
+                      </div>
+                    </th>
+                    <td>
+                      {{ producto.nombre }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ producto.categoria }}
+                      </span>
+                    </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ producto.cantidad }}
+                      </span>
+                    </td>
+                    <td class="text-left">
+                      <a href="#" onclick="" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings-gear-65"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}{% endblock javascripts %}

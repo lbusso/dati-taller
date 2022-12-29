@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Documento sin título</title>
+<style>
+
+.parent {
+display: grid;
+grid-template-columns: 1fr 10fr 1fr;
+grid-template-rows: 5fr;
+grid-row-gap: 0px;
+}
+
+.div1 { grid-area: 1 / 2 / 2 / 3; }
+.div2 { grid-area: 2 / 2 / 3 / 3; }
+.div3 { grid-area: 3 / 2 / 4 / 3; }
+
+#border {
+border-right: 3px solid #7E5FA0;
+border-left: 3px solid #9e83c1;
+}
+#borderradiustop {
+border-radius: 10px 10px 0px 0px;
+}
+#borderradiusbotton {
+border-radius: 0px 0px 10px 10px;
+}
+</style>
+	</head>
+
+<body>
+<div class="parent">
+	<div id="borderradiustop" class="div1" align="right"  style="background: linear-gradient(132deg, #9e83c1 0%, #7E5FA0 50%, #9e83c1 100%)">
+		<div style="margin: 1%">
+			<img src="http://www.fcejs.unsl.edu.ar/wp-content/uploads/2022/10/ADMINISTRATIVA-FCEJS.png" style="min-height: 10%; max-width: 100%; min-width: 100%;">
+		</div>
+	</div>
+	<div  id="border" class="div2">
+		<div style="margin: 2%">
+			<p align="justify"><font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" size="-1"><strong>{{ subject }}:</strong></font></p>
+			<p align="justify"><font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" size="-1">{{ mensaje | safe }}</font></p>
+		</div>
+        <ul>
+            {% if adjuntos %}
+            <h4>Adjuntos:</h4>
+                {% for link in adjuntos %}
+                <li><a href="https://dati.fica.unsl.edu.ar/{{ link.files.url }}"> {{ link.files.name   }}</a></li>
+                {% endfor %}
+            {% endif %}
+            </ul>
+	</div>
+
+	<div id="borderradiusbotton" class="div3" align="center" style="background: linear-gradient(132deg, #9e83c1 0%, #7E5FA0 50%, #9e83c1 100%)">
+		<font style="font-family: Gotham, 'Helvetica Neue', Helvetica, Arial, 'sans-serif'" color="#FFFFFF"><p>{{ firma.titulo }}, {{ firma.nombre }} </p>
+            <p>Email: {{ mail }}</p>
+				<p>{{ firma.secretaria }}</p></font> 
+	</div>
+</div>
+</body>
+</html>

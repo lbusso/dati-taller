@@ -1,0 +1,16 @@
+
+
+.bg-gradient-success {
+  background: linear-gradient(87deg, #2dce89 0, #2dcecc 100%) !important;
+}
+
+.bg-success {
+  background-color: #2dce89 !important;
+}
+
+a.bg-success:hover,
+a.bg-success:focus,
+button.bg-success:hover,
+button.bg-success:focus {
+  background-color: #24a46d !important;
+}

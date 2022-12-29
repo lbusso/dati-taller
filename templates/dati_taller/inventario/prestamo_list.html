@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Equipos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default shadow">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-white mb-0 float-left">Lista de Prestamos.</h2>
+                <a href="" onclick="return abrir_modal('{% url 'prestamo_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table class="table align-items-center table-dark table-flush">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Producto</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for prestamo in prestamo %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3 bg-info">
+                          <i class="ni ni-box-2"></i>
+                        </a>
+                      </div>
+                    </th>
+                    <td>
+                      {{ prestamo.cliente }}
+                    </td>
+                    <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ prestamo.producto }}
+                      </span>
+                    </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ prestamo.fecha_prestamo }}
+                      </span>
+                    </td>
+                    <td class="text-left">
+                      <a href="" onclick="return abrir_modal('{% url 'prestamo_devolver' prestamo.pk %}')" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class="fa fa-undo"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE -->
+{% block javascripts %}
+{% endblock javascripts %}

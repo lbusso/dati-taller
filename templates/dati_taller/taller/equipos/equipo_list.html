@@ -1,0 +1,87 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Equipos {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+    <div class="container-fluid mt--7 mb-100">
+      <div class="row mt-5">
+        <div class="col">
+          <div class="card bg-default bg-light">
+            <div class="card-header bg-transparent border-0">
+              <h2 class="text-dark mb-0 float-left">Lista de Equipos.</h2>
+                <a href="" onclick="return abrir_modal('{% url 'equipo_create' %}')" class="avatar rounded-circle mr-1 bg-success float-right">
+                    <i class=" ni ni-fat-add ni-3x"></i>
+                </a>
+            </div>
+              <div class="table-responsive">
+              <table id="lista-pendiente" class="table align-items-center table-light table-flush">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Codigo</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Caracteristicas</th>
+                    <th scope="col">En Reparación</th>
+                    <th scope="col">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                {% for equipo in object_list %}
+                    <tr>
+                    <th scope="row">
+                      <div class="media align-items-center">
+                        <a href="#" class="avatar rounded-circle mr-3 bg-info">
+                          <span class="mb-0 text-sm">{{ equipo.codigo }}</span>
+                        </a>
+                      </div>
+                    </th>
+                        <td>
+                            {{ equipo.tipo }}
+                        </td>
+                        <td>
+                      <span class="badge badge-dot mr-4">
+                        {{ equipo.caracteristicas }}
+                      </span>
+                    </td>
+
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="mr-2">
+                            {{ equipo.en_reparacion | yesno:"si, No" }}
+                        </span>
+                      </div>
+                    </td>
+                    <td class="text-left">
+                      <a href="#" onclick="return abrir_modal('{% url 'equipo_edit' equipo.pk %}')" class="avatar rounded-circle mr-3 bg-warning">
+                          <i class=" ni ni-settings-gear-65"></i>
+                        </a>
+                    </td>
+                  </tr>
+                {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="dropdown-divider pt-7"></div>
+
+    {% include "includes/footer.html" %}
+
+    </div>
+
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+    <script>
+    $(document).ready(function() {
+        $('#lista-pendiente').DataTable({
+            "language":{"url":"https://cdn.datatables.net/plug-ins/1.12.1/i18n/es-ES.json"}
+        });
+
+    });
+    </script>
+{% endblock javascripts %}
