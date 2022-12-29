@@ -22,7 +22,7 @@ services:
       - ./data/nginx:/etc/nginx/conf.d
       - ./data/certbot/conf:/etc/letsencrypt
       - ./data/certbot/www:/var/www/certbot
-      - static:code/staticfiles
+      - static:/code/staticfiles
       - media:/code/media
     ports:
       - 80:80
