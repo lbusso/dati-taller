@@ -1,0 +1,63 @@
+{% load crispy_forms_tags %}
+<div class="modal-dialog modal-danger modal-dialog-centered modal-" role="document">
+        <div class="modal-content bg-gradient-danger">
+            <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-notification">Vamos a crear un cliente!</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="py-3 text-center">
+                    <i class="fa fa-user-alt fa-3x"></i>
+                    <h4 class="heading mt-4">Nuevo Cliente!</h4>
+                        <form id="createClient" method="post" action="{% url 'cliente_create_modal' %}">{% csrf_token %}
+                            <div class="form-group text-left">
+                                {{ form | crispy }}
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-white" id="btn-crear-cliente">Ok, Crear!</button>
+                            <button type="button" class="btn btn-link text-white ml-auto" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(document).ready(function (){
+
+        $("#btn-crear-cliente").click(function () {
+
+            var serializeData = $('#createClient').serialize()
+            var template = "{% url 'cliente_create_modal' %}";
+            var ruta = window.location.pathname
+
+            $.ajax({
+
+                type: "POST",
+                data: serializeData,
+                url: template,
+                success: function (response) {
+                    cerrar_modal_cliente();
+                    if (ruta === '{% url 'orden_list' %}') {
+                        abrir_modal('{% url 'orden_create' %}');
+
+                    } else if ( ruta === '{% url 'evento_list' %}'){
+
+                        abrir_modal('{% url 'evento_create' %}');
+                    }else {
+                        abrir_modal('{% url 'domicilio_create' %}');
+                    }
+                },
+
+                error: function (jqXHR, textStatus, errorThrow) {
+                    console.log(textStatus, errorThrow);
+                    cerrar_modal();
+                }
+            });
+
+        });
+    })
+</script>
