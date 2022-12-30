@@ -47,7 +47,7 @@ class ClienteCreateForm(forms.ModelForm):
 class EquipoCreateForm(ModelForm):
     class Meta:
         model = Equipo
-        exclude = ['en_reparacion', 'en_taller']
+        exclude = ['en_reparacion', 'en_taller', 'lugar_reparacion']
 
 
 class EquipoEditForm(ModelForm):
