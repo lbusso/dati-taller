@@ -103,15 +103,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     },
-    'email': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'FICA',
-            'USER': 'lbusso',
-            'PASSWORD': 'Gesti@nBusso',
-            'HOST': '10.101.10.187',
-            'PORT': '',
-        }
-}
 
 
 # Password validation
@@ -156,15 +147,6 @@ STATIC_ROOT = (os.path.join(BASE_DIR, 'staticfiles',))
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-
-DEFAULT_FROM_EMAIL = 'dati.fica.unsl.edu.ar'
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cdctaller.ficafcejs@gmail.com'
-EMAIL_HOST_PASSWORD = 'orlistfpiksupvkt'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = 'login'
